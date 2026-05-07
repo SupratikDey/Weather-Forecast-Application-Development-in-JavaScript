@@ -10,7 +10,7 @@ button.addEventListener("click",(e)=>{
     city = input.value;
     //console.log(city);
 
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
         .then(res=>res.json())
         .then(res=>{
             display(res);
@@ -41,24 +41,27 @@ function display(value){
 
         //generating dt value
         //let dt1 = Math.floor(Date.now()/1000) + (86400 * i);
-        fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat1}&lon=${lon1}&exclude=minutely,hourly&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat1}&lon=${lon1}&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
         .then(res=>res.json())
         .then(res=> {
             const temp = document.createElement("p");
-            temp.innerText = res.daily[i].temp.day;
+            temp.innerText = `Temperature : ${res.main.temp}`;
             const humidity = document.createElement("p");
-            humidity.innerText = res.daily[i].humidity;
+            humidity.innerText = `Humidity : ${res.main.humidity}`;
             const feels_like = document.createElement("p");
-            feels_like.innerText = res.daily[i].feels_like.day;
-            const clouds = document.createElement("p");
-            clouds.innerText = res.daily[i].clouds;
+            feels_like.innerText = `Fells Like : ${res.main.feels_like}`;
+            const temp_min = document.createElement("p");
+            temp_min.innerText = `Minimum Temp : ${res.main.temp_min}`;
+            const temp_max = document.createElement("p");
+            temp_max.innerText = `Maximum Temp : ${res.main.temp_max}`;
             const description = document.createElement("p");
-            description.innerText = res.daily[i].weather[0].description;
+            description.innerText = `Description : ${res.weather[0].description}`;
             
             block1.appendChild(temp);
             block1.appendChild(feels_like);
             block1.appendChild(humidity);
-            block1.appendChild(clouds);
+            block1.appendChild(temp_min);
+            block1.appendChild(temp_max);
             block1.appendChild(description);
         })
         part2.appendChild(block1);
