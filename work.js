@@ -8,6 +8,7 @@ const recentCities = document.querySelector("#recentcity");
 
 let city;
 let savedcoordinate = null;
+let metric = "K";
 
 
 let unit = "standard";
@@ -16,7 +17,16 @@ selectunit.addEventListener("change",(e)=>{
         unit=selectunit.value;
     }
     if(savedcoordinate){
-        display(savedcoordinate)
+        if(unit=="metric"){
+            metric = "C";
+        }else if(unit =="imperial"){
+            metric="F";
+        }else{
+            metric="K";
+        }
+        
+        display(savedcoordinate);
+
     }else{
         alert("Please Enter Location");
         return;
@@ -28,7 +38,7 @@ button.addEventListener("click",(e)=>{
     city = input.value;
     //console.log(city);
 
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=--`)
         .then(res=>res.json())
         .then(res=>{
             if(res.length === 0){
@@ -84,7 +94,7 @@ recentCities.addEventListener("change",()=>{
 
     if(selectedCity){
 
-        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=1&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
+        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=1&appid=--`)
         .then(res => res.json())
         .then(res => {
 
@@ -123,7 +133,7 @@ function display(value){
 
     savedcoordinate = value;
 
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat1}&lon=${lon1}&units=${unit}&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat1}&lon=${lon1}&units=${unit}&appid=--`)
     .then(res => res.json())
     .then(res => {
 
@@ -139,7 +149,7 @@ function display(value){
             date1.innerText = data.dt_txt;
 
             const temp = document.createElement("p");
-            temp.innerText = `Temperature : ${data.main.temp}`;
+            temp.innerText = `Temperature : ${data.main.temp} °${metric}`;
 
             const humidity = document.createElement("p");
             humidity.innerText = `Humidity : ${data.main.humidity}`;
