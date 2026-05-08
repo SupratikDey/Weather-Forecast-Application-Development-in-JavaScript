@@ -132,6 +132,7 @@ function display(value){
     const lon1 = value[0].lon;
 
     savedcoordinate = value;
+    let warningShown = false;
 
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat1}&lon=${lon1}&units=${unit}&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
     .then(res => res.json())
@@ -140,6 +141,11 @@ function display(value){
         for(let i=0;i<5;i++){
 
             const data = res.list[i * 8];
+
+            if(!warningShown && (data.main.temp > 40 || data.main.temp < 0)){
+                alert("Watch Out! The temperature is not safe. Stay indoors.");
+                warningShown = true;
+            }
 
             const block1 = document.createElement("div");
             block1.classList.add("block");
