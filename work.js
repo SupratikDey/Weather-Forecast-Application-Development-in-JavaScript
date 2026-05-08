@@ -4,9 +4,11 @@ const part2 = document.querySelector("#part2");
 const currentbutton = document.querySelector("#currentLocation");
 const selectunit = document.querySelector("#unitchoosen")
 const body = document.querySelector("#container")
+const recentCities = document.querySelector("#recentcity");
 
 let city;
 let savedcoordinate = null;
+
 
 let unit = "standard";
 selectunit.addEventListener("change",(e)=>{
@@ -34,10 +36,62 @@ button.addEventListener("click",(e)=>{
                 return;
             }
             display(res);
+            saveCity(city);
         })
         .catch(res=>{
             alert(`Error faced : ${res}`)
         })
+})
+
+//Code to save city in recent searches
+function saveCity(city){
+
+    let cities = JSON.parse(localStorage.getItem("cities")) || [];
+
+    if(!cities.includes(city)){
+
+        cities.push(city);
+
+        localStorage.setItem("cities", JSON.stringify(cities));
+    }
+
+    loadCities();
+}
+
+function loadCities(){
+
+    let cities = JSON.parse(localStorage.getItem("cities")) || [];
+
+    recentCities.innerHTML = `
+        <option value="">Recent Searches</option>
+    `;
+
+    cities.forEach((city)=>{
+
+        const option = document.createElement("option");
+
+        option.value = city;
+
+        option.innerText = city;
+
+        recentCities.appendChild(option);
+    })
+}
+
+recentCities.addEventListener("change",()=>{
+
+    const selectedCity = recentCities.value;
+
+    if(selectedCity){
+
+        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=1&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
+        .then(res => res.json())
+        .then(res => {
+
+            display(res);
+
+        })
+    }
 })
 
 // To Get user current Location
@@ -129,3 +183,4 @@ function display(value){
 
     });
 }
+loadCities();
