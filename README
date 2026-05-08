@@ -1,0 +1,7 @@
+Here we have created a Weather forecast app , implementing OpenWeather API to recieve accurate information regarding the weather for the current as well as upcoming 4 days.
+
+1) Users are able to select any location , via the city name and the system shall display the weather information for that city.
+2) We have also implemented personal warnings if temperature is not suited for the outdoors.
+3) All the users history is stores as well using localstorage allowing revisiting old searched.
+4) Users can also search the information based on their Current Location 
+5) The temperature can be displayed in various Units like Kelvin , Celcius and Fahrenheit.
