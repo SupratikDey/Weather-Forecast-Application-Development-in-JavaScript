@@ -12,9 +12,9 @@
         <div>
             <select id="unitchoosen">Unit of temperature
                 <option value="">Unit of temperature</option>
-                <option value="standard" selected>Kelvin</option>
-                <option value="metric">Celsius</option>
-                <option value="imperial">Fahrenheit</option>
+                <option value="standard" selected>Kelvin °K</option>
+                <option value="metric">Celsius °C</option>
+                <option value="imperial">Fahrenheit °F</option>
             </select>
         </div>        
     </div>
@@ -23,14 +23,18 @@
         <div id="part1">
             <form>
                 <label for="city"><strong>ENTER A CITY :</strong></label>
-                <input id="city" type="text" placeholder="Bangalore">
+                <input id="city" type="text" placeholder="Bangalore" >
 
-                <input id="button" type="submit">
+                <input id="button" type="submit" class="border-solid">
             </form>
             <p>-----OR-----</p>
             <!-- code to include User's current location -->
             <!-- Current location -->
             <button id="currentLocation">Use Current Location</button>
+
+            <select id="recentcity">
+                <option>Recent Searches</option>
+            </select>
         </div>
         <div id="part2">
 
