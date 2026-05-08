@@ -3,6 +3,7 @@ const button = document.querySelector("#button");
 const part2 = document.querySelector("#part2");
 const currentbutton = document.querySelector("#currentLocation");
 const selectunit = document.querySelector("#unitchoosen")
+const body = document.querySelector("#container")
 
 let city;
 let savedcoordinate = null;
@@ -60,57 +61,71 @@ currentbutton.addEventListener("click",(e)=>{
 })
 // function to get lat and lon of the locationg
 function display(value){
+
     part2.innerHTML='';
 
     const lat1 = value[0].lat;
     const lon1 = value[0].lon;
-    // store value in savedcoordinates
+
     savedcoordinate = value;
-    for(let i=0;i<5;i++){
-        //console.log(value[i].lat);
-        //console.log(value[i].lon);
 
-        const block1 = document.createElement("div");
-        block1.classList.add("block");
-        const date1 = document.createElement("h3")
-        
-        let date = new Date();
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat1}&lon=${lon1}&units=${unit}&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
+    .then(res => res.json())
+    .then(res => {
 
-        date.setDate(date.getDate() + i);
+        for(let i=0;i<5;i++){
 
-        let day = String(date.getDate()).padStart(2,'0');
-        let month = String(date.getMonth() + 1).padStart(2,'0');
-        let year = date.getFullYear();
+            const data = res.list[i * 8];
 
-        date1.innerText = `${day}/${month}/${year}`;
-        block1.appendChild(date1);
+            const block1 = document.createElement("div");
+            block1.classList.add("block");
 
-        //generating dt value
-        //let dt1 = Math.floor(Date.now()/1000) + (86400 * i);
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat1}&lon=${lon1}&units=${unit}&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
-        .then(res=>res.json())
-        .then(res=> {
+            const date1 = document.createElement("h3");
+
+            date1.innerText = data.dt_txt;
+
             const temp = document.createElement("p");
-            temp.innerText = `Temperature : ${res.main.temp}`;
+            temp.innerText = `Temperature : ${data.main.temp}`;
+
             const humidity = document.createElement("p");
-            humidity.innerText = `Humidity : ${res.main.humidity}`;
+            humidity.innerText = `Humidity : ${data.main.humidity}`;
+
             const feels_like = document.createElement("p");
-            feels_like.innerText = `Fells Like : ${res.main.feels_like}`;
+            feels_like.innerText = `Feels Like : ${data.main.feels_like}`;
+
             const temp_min = document.createElement("p");
-            temp_min.innerText = `Minimum Temp : ${res.main.temp_min}`;
+            temp_min.innerText = `Minimum Temp : ${data.main.temp_min}`;
+
             const temp_max = document.createElement("p");
-            temp_max.innerText = `Maximum Temp : ${res.main.temp_max}`;
+            temp_max.innerText = `Maximum Temp : ${data.main.temp_max}`;
+
             const description = document.createElement("p");
-            description.innerText = `Description : ${res.weather[0].description}`;
-            
+            description.innerText = `Description : ${data.weather[0].description}`;
+
+            const icon = document.createElement("img");
+            icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+            block1.appendChild(date1);
             block1.appendChild(temp);
             block1.appendChild(feels_like);
             block1.appendChild(humidity);
             block1.appendChild(temp_min);
             block1.appendChild(temp_max);
             block1.appendChild(description);
-        })
-        part2.appendChild(block1);
-    }
-    
+            block1.appendChild(icon);
+
+            part2.appendChild(block1);
+        }
+        const image = res.list[0].weather[0].main;
+        body.style.backgroundSize = "cover";
+        body.style.backgroundPosition = "center";
+        if(image=="Rain"){
+            body.style.backgroundImage = "url('https://images.unsplash.com/photo-1610741083757-1ae88e1a17f7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')";
+        }else if(image=="Clear"){
+            body.style.backgroundImage = "url('https://plus.unsplash.com/premium_photo-1733306531071-087c077e1502?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')";
+        }else if(image=="Clouds"){
+            body.style.backgroundImage="url('https://images.unsplash.com/uploads/14122598319144c6eac10/5f8e7ade?q=80&w=1361&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')";
+        }
+
+    });
 }

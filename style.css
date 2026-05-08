@@ -1,6 +1,7 @@
 #container{
     padding:20px;
     display:flex;
+    flex-wrap: wrap;
 }
 #part1{
     flex:1 1 0;
@@ -17,8 +18,8 @@
     flex-wrap: wrap;
 }
 .block{
-    height:300px;
-    width:200px;
+    height:370px;
+    width:(200px,100%);
     margin:10px;
     border: 1px solid black;
 }
@@ -28,4 +29,27 @@
     align-items: center;
     background-color: aqua;
     padding:20px;
+}
+form{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+@media (max-width:768px){
+
+    #container{
+        flex-direction: column;
+    }
+
+    #part1,#part2{
+        width:100%;
+    }
+
+    #headofPage{
+        flex-direction: column;
+        gap:10px;
+        text-align:center;
+    }
 }
