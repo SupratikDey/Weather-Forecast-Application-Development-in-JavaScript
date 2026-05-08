@@ -22,3 +22,10 @@
     margin:10px;
     border: 1px solid black;
 }
+#headofPage{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    padding:20px;
+}

@@ -7,7 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Weather Forecast</h1>
+    <div id="headofPage">
+        <h1>Weather Forecast</h1>
+        <div>
+            <select id="unitchoosen">Unit of temperature
+                <option value="">Unit of temperature</option>
+                <option value="standard" selected>Kelvin</option>
+                <option value="metric">Celsius</option>
+                <option value="imperial">Fahrenheit</option>
+            </select>
+        </div>        
+    </div>
+    
     <div id="container">
         <div id="part1">
             <form>
@@ -17,7 +28,8 @@
                 <input id="button" type="submit">
             </form>
             <!-- code to include User's current location -->
-
+            <!-- Current location -->
+            <button id="currentLocation">Use Current Location</button>
         </div>
         <div id="part2">
 
