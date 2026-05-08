@@ -38,7 +38,7 @@ button.addEventListener("click",(e)=>{
     city = input.value;
     //console.log(city);
 
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=--`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
         .then(res=>res.json())
         .then(res=>{
             if(res.length === 0){
@@ -94,7 +94,7 @@ recentCities.addEventListener("change",()=>{
 
     if(selectedCity){
 
-        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=1&appid=--`)
+        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=1&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
         .then(res => res.json())
         .then(res => {
 
@@ -133,7 +133,7 @@ function display(value){
 
     savedcoordinate = value;
 
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat1}&lon=${lon1}&units=${unit}&appid=--`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat1}&lon=${lon1}&units=${unit}&appid=dd8b9eb569c7f48a6f5662f3b137ea65`)
     .then(res => res.json())
     .then(res => {
 

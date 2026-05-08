@@ -8,6 +8,10 @@
     border:2px solid black;
     margin:10px;
     padding:10px;
+    background-color: brown;
+    color:cornsilk;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
 }
 #part2{
     flex:2 1 0;
@@ -19,9 +23,12 @@
 }
 .block{
     height:370px;
-    width:(200px,100%);
+    width:max(200px,100%);
     margin:10px;
     border: 1px solid black;
+    background-color: cadetblue;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight:bold;
 }
 #headofPage{
     display:flex;
@@ -52,4 +59,8 @@ form{
         gap:10px;
         text-align:center;
     }
+}
+h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:bold;
 }
