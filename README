@@ -2,9 +2,11 @@ Here we have created a Weather forecast app , implementing OpenWeather API to re
 
 Features of the Weather Forecast :
 1) Users are able to select any location , via the city name and the system shall display the weather information for that city.
-2) We have also implemented personal warnings if temperature is not suited for the outdoors.
-3) All the users history is stores as well using localstorage allowing revisiting old searches.
-4) Users can also search the information based on their Current Location of user.
-5) The temperature can be displayed in various Units like Kelvin , Celcius and Fahrenheit Usong a dropdown.
+2) Weather onformation of a location include the Current temperature , what ot feels like , humidity , description , the minimum temperature and the maximum temperature and finally an icon.
+3) We have also implemented personal warnings if temperature is not suited for the outdoors.
+4) All the users history is stores as well using localstorage allowing revisiting old searches.
+5) Users can also search the information based on their Current Location of user.
+6) The temperature can be displayed in various Units like Kelvin , Celcius and Fahrenheit Usong a dropdown.
+7) If the temperature is rainy the backgorund of the website will turn to a rainy image to dynamically describe the weather.
 
 The link to my github project : https://github.com/SupratikDey/Weather-Forecast-Application-Development-in-JavaScript
